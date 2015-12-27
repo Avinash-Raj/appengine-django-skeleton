@@ -15,6 +15,7 @@
 from django.db import models
 
 from django.db import models
+from google.appengine.ext import ndb
 
 
 class Question(models.Model):
@@ -26,3 +27,9 @@ class Choice(models.Model):
     question = models.ForeignKey(Question)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
+
+
+class Employee(ndb.Model):
+    name = ndb.StringProperty(required=True)
+    role = ndb.StringProperty(required=True)
+    email = ndb.StringProperty()
