@@ -18,6 +18,7 @@ from django.shortcuts import render
 
 from django.views.generic import TemplateView
 import datetime
+
 '''
 class HomeView(TemplateView):
     template_name = 'home.html'
@@ -28,6 +29,7 @@ class HomeView(TemplateView):
                   }
         return self.render_to_response(context)
 '''
+
 
 def home(request):
     now = datetime.datetime.now()
