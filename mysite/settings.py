@@ -26,8 +26,10 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'static', 'templates')
 
 
 # Quick-start development settings - unsuitable for production
@@ -44,15 +46,34 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = (
+# Application definition
+# django debugging stuff
+ADMIN_TOOLS = (
+)
+
+# django
+DJANGO_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+)
+
+LOCAL_APPS = (
     'todo',
 )
+
+
+EXTERNAL_APPS = (
+    'django_extensions',
+    'compressor',
+)
+
+
+# the order is important!
+INSTALLED_APPS = ADMIN_TOOLS + DJANGO_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
     'google.appengine.ext.ndb.django_middleware.NdbDjangoMiddleware',
@@ -71,7 +92,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,4 +159,5 @@ STATIC_URL = '/static/'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )

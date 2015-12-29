@@ -13,25 +13,21 @@
 # limitations under the License.
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import TemplateView
+from models import Todo
+import datetime
 
 # Create your views here.
 
-from django.views.generic import TemplateView
-import datetime
 
-'''
 class HomeView(TemplateView):
     template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
+
+        items = Todo.objects.all()
         context = {
-                  'some_dynamic_value': 'This text comes from django view!',
+                  'items': items,
                   }
+
         return self.render_to_response(context)
-'''
-
-
-def home(request):
-    now = datetime.datetime.now()
-    html = "<html><body>It is now %s.</body></html>" % now
-    return HttpResponse(html)

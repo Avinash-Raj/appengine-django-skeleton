@@ -16,9 +16,11 @@
 from django.db import models
 
 
-class Employee(models.Model):
-    s_no = models.IntegerField()
-    name = models.CharField(max_length=200)
+class Todo(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    title = models.CharField(max_length=200, blank=False, null=False)
+    description = models.TextField(blank=True)
+    created = models.DateTimeField()
 
     def __str__(self):
         return self.name
